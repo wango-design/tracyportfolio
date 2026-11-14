@@ -29,8 +29,7 @@ BRANDS = {
     "ccea": ("CCEA", "ccea.png", "https://ccea.ae/", "Branding and design"),
     "fos": ("Factory of Sight", "factory-of-sight.png", "https://factoryofsight.com/", "Design"),
     "gamma": ("GAMMA USA", "gamma-usa.svg", "https://www.gammabeyond.com/en/", "Design"),
-    "klowe": ("KLOWE", None, None, "Full rebrand and brand strategy"),
-    "altara": ("Altara Group", None, None, "Strategy for five brands at once"),
+    "altara": ("Altara Group", None, "https://altarasocial.ae/", "Strategy for five brands at once"),
     "altarasocial": ("Altara Social", "altara-social.png", "https://altarasocial.ae/", "Strategy and influencer plan"),
     "altaralaw": ("Altara Law", "altara-law.png", "https://altaralaw.com/", "Strategy and influencer plan"),
     "elite": ("Elite Supplements", "elite-supplements.svg", "https://elitesupps.ae/", "Strategy, influencer plan and brand"),
@@ -132,7 +131,7 @@ PROJECTS = [
 ]
 HOME_FEATURED = ["engage-clinic", "traders-financial-group", "ccea", "lamise-beauty", "factory-of-sight", "gamma-usa"]
 HOME_STRATEGY = ["altara-group", "elite-supplements"]
-MORE_BRANDS = ["emmaship", "dessecrew", "avalar", "aureum", "tradershub", "klowe", "talentec", "altarasocial", "altaralaw", "hrprime", "amedanca", "crwd"]
+MORE_BRANDS = ["emmaship", "dessecrew", "avalar", "aureum", "tradershub", "talentec", "altarasocial", "altaralaw", "hrprime", "amedanca", "crwd"]
 LOGO_WALL = ["engage", "tfg", "ccea", "lamise", "fos", "gamma", "emmaship", "dessecrew", "avalar", "aureum", "hrprime", "hme", "elite", "altarasocial", "altaralaw", "amedanca", "talentec", "crwd"]
 FILTERS = [("all", "All work"), ("branding", "Branding"), ("design", "Design"), ("ecommerce", "Online shops"),
            ("social", "Social & content"), ("campaigns", "Campaigns"), ("strategy", "Strategy")]
@@ -156,7 +155,7 @@ CHAPTERS = [  # year, headline, where, what I did, brands shown
     ("2025", "Ran strategy for five brands at once.", "Altara Group",
      ["5 marketing plans", "5 influencer plans", "Led the content team", "Law, travel, HR, wellness & social"], ["altarasocial", "altaralaw", "elite", "hrprime", "amedanca"]),
     ("Now", "Leading the plan, the brand and the team.", "CRWD Dubai · Marketing Manager",
-     ["Marketing strategy", "Campaign launches", "Rebrands & design", "Paid ads", "Social & content", "Leading the team"], ["engage", "tfg", "ccea", "fos", "gamma", "tradershub", "klowe", "emmaship", "dessecrew", "avalar", "aureum"]),
+     ["Marketing strategy", "Campaign launches", "Rebrands & design", "Paid ads", "Social & content", "Leading the team"], ["engage", "tfg", "ccea", "fos", "gamma", "tradershub", "emmaship", "dessecrew", "avalar", "aureum"]),
 ]
 
 # ---------------------------------------------------------------- HELPERS
@@ -174,7 +173,7 @@ for _p in PROJECTS:
             _p["cats"].append(_cat)
 P = {p["slug"]: p for p in PROJECTS}
 # brands without a project page, shown under the Social & content filter
-SOCIAL_BRANDS = ["emmaship", "dessecrew", "avalar", "aureum", "tradershub", "klowe", "altarasocial", "altaralaw", "hrprime", "amedanca", "talentec", "crwd"]
+SOCIAL_BRANDS = ["emmaship", "dessecrew", "avalar", "aureum", "tradershub", "altarasocial", "altaralaw", "hrprime", "amedanca", "talentec", "crwd"]
 
 
 class Ctx:
@@ -377,7 +376,7 @@ def page_home(c):
                        '<div class="pgrid">' + "".join(pcard(c, s) for s in HOME_STRATEGY) + "</div>")
     featured = section(head("Selected work", "Brands I’ve shaped.", c.href("work"), "All projects") +
                        '<div class="pgrid">' + "".join(pcard(c, s) for s in HOME_FEATURED) + "</div>", "sec-work")
-    logos = section(f'<div class="logos-head">{eyebrow("Trusted by")}<p class="muted">23 brands and counting, across the UAE and Uganda.</p></div>' + logo_wall(c), "sec-tight")
+    logos = section(f'<div class="logos-head">{eyebrow("Trusted by")}<p class="muted">22 brands and counting, across the UAE and Uganda.</p></div>' + logo_wall(c), "sec-tight")
     return hero + story + how + strategy + featured + logos + cta(c)
 
 
