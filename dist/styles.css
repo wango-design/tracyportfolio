@@ -494,3 +494,8 @@ html[data-lang="ar"] .lede, html[data-lang="ar"] .story p { text-align: right; }
 .lang-code { font: 600 13px var(--sans); letter-spacing: .02em; }
 .sec-head.slim { align-items: center; margin-bottom: 8px; }
 .sec-head.slim .eyebrow { margin: 0; }
+.logowall li { padding: 0; }
+.logowall li a { display: grid; place-items: center; width: 100%; height: 100%; padding: 18px; transition: background .2s; }
+.logowall li a:hover { background: var(--soft); }
+.mark-link { display: inline-flex; border-radius: 10px; transition: transform .2s; }
+.mark-link:hover { transform: translateY(-3px) scale(1.06); }

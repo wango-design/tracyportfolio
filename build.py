@@ -292,7 +292,16 @@ def services():
 
 def logo_wall(c):
     return '<ul class="logowall">' + "".join(
-        f'<li title="{e(BRANDS[k][0])}"><img src="{c.asset(BRANDS[k][1])}" alt="{e(BRANDS[k][0])}"></li>' for k in LOGO_WALL) + "</ul>"
+        (f'<li><a href="{BRANDS[k][2]}" target="_blank" rel="noopener" title="Visit {e(BRANDS[k][0])}"><img src="{c.asset(BRANDS[k][1])}" alt="{e(BRANDS[k][0])} website"></a></li>'
+         if BRANDS[k][2] else f'<li title="{e(BRANDS[k][0])}"><img src="{c.asset(BRANDS[k][1])}" alt="{e(BRANDS[k][0])}"></li>') for k in LOGO_WALL) + "</ul>"
+
+
+def linked_mark(c, key, size=""):
+    name, _, site, _ = BRANDS[key]
+    m = mark(c, key, size)
+    if site:
+        return f'<a class="mark-link" href="{site}" target="_blank" rel="noopener" title="Visit {e(name)}" aria-label="Visit {e(name)} website">{m}</a>'
+    return f'<span title="{e(name)}">{m}</span>'
 
 
 def portrait_x(c, cls=""):
@@ -321,7 +330,7 @@ def journey(c, uid):
     for i, (y, line, where, did, brands, *rest) in enumerate(CH):
         cards = "".join(f'<li style="--i:{k}">{e(d)}</li>' for k, d in enumerate(did))
         note = f'<span class="jx-note">{e(rest[0])}</span>' if rest else ""
-        logos = ('<div class="jx-brands">' + "".join(mark(c, b, " sm") for b in brands) + note + "</div>") if brands else ""
+        logos = ('<div class="jx-brands">' + "".join(linked_mark(c, b, " sm") for b in brands) + note + "</div>") if brands else ""
         panels += (f'<div class="jx-panel" role="tabpanel" id="{uid}-panel-{i}" aria-labelledby="{uid}-tab-{i}"{"" if i == 0 else " hidden"}>'
                    f'<p class="jx-where">{e(where)}</p><h3 class="jx-line">{e(line)}</h3>{chapter_links(y)}'
                    f'<p class="eyebrow jx-did-label">What I did</p><ul class="jx-cards">{cards}</ul>{logos}</div>')
@@ -418,7 +427,7 @@ def page_project(c, i):
     p = PROJECTS[i]
     nxt = PROJECTS[(i + 1) % len(PROJECTS)]
     name, _, site, _ = BRANDS[p["brand"]]
-    visit = f'<a class="btn" href="{site}" target="_blank" rel="noopener">Visit the live site {ARROW_UP}</a>' if site and p["shot"] else ""
+    visit = f'<a class="btn" href="{site}" target="_blank" rel="noopener">Visit {e(name)} {ARROW_UP}</a>' if site else ""
     top = section(f'''<a class="tlink back" href="{c.href("work")}">{BACK} All work</a>
 <div class="case-brand top">{mark(c, p["brand"], " sm")}<span>{e(name)}</span><span class="dot">{e(p["context"])}</span></div>
 <h1 class="display-1">{e(p["title"])}</h1>
