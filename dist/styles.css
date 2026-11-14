@@ -492,3 +492,5 @@ font font, .goog-text-highlight { background: none !important; box-shadow: none 
 html[data-lang="ar"] .lede, html[data-lang="ar"] .story p { text-align: right; }
 .lang select { position: absolute; inset: 0; width: 100%; max-width: none; opacity: 0; }
 .lang-code { font: 600 13px var(--sans); letter-spacing: .02em; }
+.sec-head.slim { align-items: center; margin-bottom: 8px; }
+.sec-head.slim .eyebrow { margin: 0; }

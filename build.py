@@ -275,7 +275,8 @@ def eyebrow(t):
 
 def head(eb, title, more_href=None, more_label=None, c=None):
     link = f'<a class="tlink" href="{more_href}">{more_label} {ARROW}</a>' if more_href else ""
-    return f'<div class="sec-head"><div>{eyebrow(eb)}<h2 class="display-2">{title}</h2></div>{link}</div>'
+    h = f'<h2 class="display-2">{title}</h2>' if title else ""
+    return f'<div class="sec-head{"" if title else " slim"}"><div>{eyebrow(eb)}{h}</div>{link}</div>'
 
 
 def cta(c):
@@ -360,7 +361,7 @@ def page_home(c):
 <div class="actions"><a class="btn" href="mailto:{EMAIL}">{MAIL} Email me</a><a class="tlink" href="#journey">My journey {ARROW}</a></div></div>
 {portrait_x(c, "px-hero")}
 </div></section>'''
-    story = section(head("My journey", "Six years, one question.", c.href("about"), "Read my story") + journey(c, "jx-home"), "sec-journey")
+    story = section(head("My journey", "", c.href("about"), "Read my story") + journey(c, "jx-home"), "sec-journey")
     story = story.replace('<section class="sec sec-journey">', '<section class="sec sec-journey" id="journey">', 1)
     how = section(head("How I work", "Plan first. Then launch.") + process(), "sec-process")
     strategy = section(head("Strategy & campaigns", "Strategies I’ve set. Campaigns I’ve launched.") +
@@ -385,7 +386,7 @@ def page_work(c):
 def page_about(c):
     hero = section(
                    f'<div class="about-grid">{portrait_x(c, "px-about")}<div class="about-copy story"><h1 class="story-title">My journey</h1><p class="lede story-lead">I started as a social media manager in Uganda. I had a phone full of drafts, a content calendar and a lot of curiosity. Every post taught me something about people: what makes them stop, what makes them care and what makes them come back.</p><p class="story-p">Then I stepped into e-commerce. I ran online stores for beauty, fashion and perfume brands, from product pages to getting found on Google to the first sale of the day. That was where I learned that a beautiful brand still needs a reason to click “buy.”</p><p class="story-p">From stores I moved into campaigns. In Dubai I helped a home-services business turn attention into real customers and booked jobs. Then I took on five brands at once, across law, travel, HR, wellness and social, each with its own audience and its own voice.</p><p class="story-p">Today I set the strategy and lead the team. As Marketing Manager at <a class="story-link" href="https://crwdmarketing.com/ae" target="_blank" rel="noopener">CRWD Dubai</a>, I guide marketing teams and campaigns for brands across the UAE. I set the vision, and directors, editors and designers bring it to life. AI now works alongside us, helping brands get found faster, create more and grow with the right tools.</p><p class="story-p">I’m proud of every brand that trusted me along the way. Each one taught me something, and each one is part of this story.</p><a class="tlink" href="{c.href("work")}">See the work {ARROW}</a></div></div>', "sec-first sec-about-hero")
-    story = section(head("Year by year", "Six years, one question.") + journey(c, "jx-about"), "sec-journey")
+    story = section(head("Year by year", "") + journey(c, "jx-about"), "sec-journey")
     how = section(head("How I work", "Plan first. Then launch.") + process()) + section(head("What I do", "I build the plan. My team builds the magic.") + services())
     return hero + story + how + cta(c)
 
