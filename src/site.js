@@ -98,3 +98,38 @@
     window.location.href = href;
   });
 })();
+
+/* Language picker: Google Translate, choice remembered in the standard googtrans cookie */
+(function () {
+  var sel = document.getElementById("lang-select");
+  if (!sel) return;
+  function readLang() {
+    var m = document.cookie.match(/(?:^|;\s*)googtrans=\/[^/]*\/([^;]+)/);
+    return m ? decodeURIComponent(m[1]) : "en";
+  }
+  function setCookie(value) {
+    var host = location.hostname, parts = host.split("."), base = parts.length > 1 ? "." + parts.slice(-2).join(".") : "";
+    var expire = value ? "" : ";expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    var v = value ? "/en/" + value : "";
+    document.cookie = "googtrans=" + v + ";path=/" + expire;
+    if (base) document.cookie = "googtrans=" + v + ";path=/;domain=" + base + expire;
+  }
+  var current = readLang();
+  sel.value = [].some.call(sel.options, function (o) { return o.value === current; }) ? current : "en";
+  document.documentElement.setAttribute("data-lang", sel.value);
+  var code = document.querySelector(".lang-code");
+  if (code) code.textContent = sel.value.split("-")[0].toUpperCase();
+  sel.addEventListener("change", function () {
+    if (sel.value === "en") setCookie(null); else setCookie(sel.value);
+    location.reload();
+  });
+  if (current !== "en") {
+    window.googleTranslateInit = function () {
+      new google.translate.TranslateElement({ pageLanguage: "en", autoDisplay: false }, "google_translate_element");
+    };
+    var sc = document.createElement("script");
+    sc.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateInit";
+    sc.async = true;
+    document.head.appendChild(sc);
+  }
+})();

@@ -355,7 +355,7 @@ def process():
 def page_home(c):
     hero = f'''<section class="hero"><div class="wrap hero-grid">
 <div class="hero-copy">{eyebrow("Brand & marketing strategist · Dubai")}
-<h1 class="display-1 hero-name">Tracy Najjingo</h1>
+<h1 class="display-1 hero-name notranslate">Tracy Najjingo</h1>
 <div class="actions"><a class="btn" href="https://wa.me/{WHATSAPP}" target="_blank" rel="noopener">{WA} WhatsApp me</a><a class="btn btn-ghost" href="mailto:{EMAIL}">{MAIL} Email me</a><a class="tlink" href="#journey">My journey {ARROW}</a></div></div>
 {portrait_x(c, "px-hero")}
 </div></section>'''
@@ -450,9 +450,18 @@ PAGES = [
      for i, p in enumerate(PROJECTS)]
 
 
+LANGUAGES = [("en", "EN · English"), ("ar", "AR · العربية"), ("fr", "FR · Français"), ("ru", "RU · Русский"),
+             ("zh-CN", "ZH · 中文"), ("hi", "HI · हिन्दी"), ("es", "ES · Español"), ("de", "DE · Deutsch"),
+             ("it", "IT · Italiano"), ("pt", "PT · Português"), ("tr", "TR · Türkçe"), ("sw", "SW · Kiswahili"), ("lg", "LG · Luganda")]
+
+
 def nav(c):
     links = "".join(f'<a href="{c.href(r)}" data-nav="{r}">{t}</a>' for r, t in [("work", "Work"), ("about", "About"), ("contact", "Contact")])
-    return f'<header class="nav"><nav class="nav-pill" aria-label="Main"><a class="logo" href="{c.href("")}">Tracy Najjingo</a><div class="nav-links">{links}</div></nav></header>'
+    opts = "".join(f'<option value="{code}">{label}</option>' for code, label in LANGUAGES)
+    lang = (f'<label class="lang notranslate" title="Language"><span class="sr">Language</span>'
+            f'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>'
+            f'<span class="lang-code" aria-hidden="true">EN</span><select id="lang-select" aria-label="Choose a language">{opts}</select></label>')
+    return f'<header class="nav"><nav class="nav-pill" aria-label="Main"><a class="logo notranslate" href="{c.href("")}">Tracy Najjingo</a><div class="nav-links">{links}{lang}</div></nav></header><div id="google_translate_element" hidden></div>'
 
 
 def footer(c):

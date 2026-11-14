@@ -477,3 +477,18 @@ em { font-style: normal; color: var(--accent); font-weight: 400; }
 .jx-links a { display: inline-flex; align-items: center; gap: 6px; font: 500 14px var(--sans); color: var(--on-dark); padding: 8px 14px; border-radius: 999px; background: oklch(1 0 0 / .12); border: 1px solid oklch(1 0 0 / .3); transition: background .2s, color .2s; }
 .jx-links a:hover { background: var(--on-dark); color: var(--navy); }
 .story-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* language picker */
+.lang { position: relative; display: inline-flex; align-items: center; gap: 6px; margin-left: 6px; padding: 7px 10px 7px 10px; border-radius: 999px; background: var(--soft); color: var(--fg); cursor: pointer; }
+.lang .ic { width: 15px; height: 15px; }
+.lang select { appearance: none; -webkit-appearance: none; border: 0; background: transparent; font: 500 13px var(--sans); color: var(--fg); cursor: pointer; padding: 0; max-width: 3.2em; }
+.lang select:focus-visible { outline: none; }
+.lang:focus-within { box-shadow: 0 0 0 2px var(--accent); }
+@media (max-width: 420px) { .lang { padding: 6px 8px; margin-left: 2px; } .lang .ic { display: none; } }
+/* hide Google's own bar and highlights so the design stays clean */
+.skiptranslate iframe, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame, .VIpgJd-ZVi9od-ORHb-OEVmcd, .VIpgJd-ZVi9od-aZ2wEe-wOHMyf { display: none !important; }
+body { top: 0 !important; }
+font font, .goog-text-highlight { background: none !important; box-shadow: none !important; }
+html[data-lang="ar"] .lede, html[data-lang="ar"] .story p { text-align: right; }
+.lang select { position: absolute; inset: 0; width: 100%; max-width: none; opacity: 0; }
+.lang-code { font: 600 13px var(--sans); letter-spacing: .02em; }
