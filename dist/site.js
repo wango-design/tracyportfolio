@@ -1,5 +1,5 @@
 (function () {
-  var EMAIL = "tracynajjimngo01@gmail.com";
+  var EMAIL = "tracynajjingo01@gmail.com";
 
   // Preview build: hash routing between views (the deployed site uses real pages instead)
   var views = document.querySelectorAll(".view");

@@ -11,7 +11,7 @@ import html, json, os, shutil
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # ---------------------------------------------------------------- CONFIG
-EMAIL = "tracynajjimngo01@gmail.com"
+EMAIL = "tracynajjingo01@gmail.com"
 LINKEDIN = "https://www.linkedin.com/in/tracy-najjingo-1318a8418"
 LINKEDIN_LABEL = "in/tracy-najjingo-1318a8418"
 WHATSAPP = "971527675035"          # country code, no + or spaces. Empty hides the WhatsApp buttons.
@@ -166,6 +166,7 @@ ARROW_UP = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 1
 BACK = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>'
 MAIL = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>'
 IN = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v7M7 7v.01M11 17v-4a2.5 2.5 0 0 1 5 0v4M11 10v7"/></svg>'
+PHONE = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>'
 WA = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></svg>'
 for _p in PROJECTS:
     for _cat in ("social", "campaigns"):
@@ -356,7 +357,7 @@ def page_home(c):
     hero = f'''<section class="hero"><div class="wrap hero-grid">
 <div class="hero-copy">{eyebrow("Brand & marketing strategist · Dubai")}
 <h1 class="display-1 hero-name notranslate">Tracy Najjingo</h1>
-<div class="actions"><a class="btn" href="https://wa.me/{WHATSAPP}" target="_blank" rel="noopener">{WA} WhatsApp me</a><a class="btn btn-ghost" href="mailto:{EMAIL}">{MAIL} Email me</a><a class="tlink" href="#journey">My journey {ARROW}</a></div></div>
+<div class="actions"><a class="btn" href="mailto:{EMAIL}">{MAIL} Email me</a><a class="tlink" href="#journey">My journey {ARROW}</a></div></div>
 {portrait_x(c, "px-hero")}
 </div></section>'''
     story = section(head("My journey", "Six years, one question.", c.href("about"), "Read my story") + journey(c, "jx-home"), "sec-journey")
@@ -391,9 +392,9 @@ def page_about(c):
 
 def contact_buttons(c):
     b = []
+    b.append(f'<a class="cbtn dark" href="mailto:{EMAIL}"><span class="cbtn-ic">{MAIL}</span>{EMAIL} {ARROW_UP}</a>')
     if WHATSAPP:
-        b.append(f'<a class="cbtn dark" href="https://wa.me/{WHATSAPP}" target="_blank" rel="noopener"><span class="cbtn-ic">{WA}</span>WhatsApp {WHATSAPP_LABEL} {ARROW_UP}</a>')
-    b.append(f'<a class="cbtn {"light" if WHATSAPP else "dark"}" href="mailto:{EMAIL}"><span class="cbtn-ic">{MAIL}</span>{EMAIL} {ARROW_UP}</a>')
+        b.append(f'<a class="cbtn light" href="tel:+{WHATSAPP}"><span class="cbtn-ic">{PHONE}</span>{WHATSAPP_LABEL}</a>')
     b.append(f'<a class="cbtn light" href="{LINKEDIN}" target="_blank" rel="noopener"><span class="cbtn-ic">{IN}</span>{LINKEDIN_LABEL} {ARROW_UP}</a>')
     return '<div class="cbtns">' + "".join(b) + "</div>"
 
@@ -465,9 +466,8 @@ def nav(c):
 
 
 def footer(c):
-    wa = f'<a href="https://wa.me/{WHATSAPP}" target="_blank" rel="noopener">WhatsApp</a>' if WHATSAPP else ""
-    float_btn = (f'<a class="float-mail" href="https://wa.me/{WHATSAPP}" target="_blank" rel="noopener">{WA}<span>WhatsApp me</span></a>' if WHATSAPP
-                 else f'<a class="float-mail" href="mailto:{EMAIL}">{MAIL}<span>{EMAIL}</span></a>')
+    wa = f'<a href="tel:+{WHATSAPP}">{WHATSAPP_LABEL}</a>' if WHATSAPP else ""
+    float_btn = ""
     return f'''<footer class="foot"><div class="wrap"><div class="foot-top"><div><p class="logo">Tracy Najjingo</p><p class="foot-sub">Brand &amp; marketing strategist · Dubai, UAE</p></div>
 <div class="foot-links"><a href="{c.href("work")}">Work</a><a href="{c.href("about")}">About</a><a href="{c.href("contact")}">Contact</a><a href="mailto:{EMAIL}">{EMAIL}</a>{wa}<a href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a></div></div>
 <p class="copy">© 2026 Tracy Najjingo. Website screenshots show live client sites.</p></div></footer>{float_btn}'''
