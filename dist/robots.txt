@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tracy-brand-story.lovable.app/sitemap.xml
