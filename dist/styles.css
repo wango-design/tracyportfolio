@@ -473,3 +473,7 @@ em { font-style: normal; color: var(--accent); font-weight: 400; }
 @media (max-width: 1000px) { .process { grid-template-columns: repeat(2, minmax(0, 1fr)); } .process li::after { display: none; } }
 @media (max-width: 560px) { .process { grid-template-columns: 1fr; } }
 .hero .actions { margin-top: 36px; }
+.jx-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 2px; }
+.jx-links a { display: inline-flex; align-items: center; gap: 6px; font: 500 14px var(--sans); color: var(--on-dark); padding: 8px 14px; border-radius: 999px; background: oklch(1 0 0 / .12); border: 1px solid oklch(1 0 0 / .3); transition: background .2s, color .2s; }
+.jx-links a:hover { background: var(--on-dark); color: var(--navy); }
+.story-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }

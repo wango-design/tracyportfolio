@@ -37,7 +37,7 @@ BRANDS = {
     "hrprime": ("Prime HR Advisory", "prime-hr.png", "https://primehradvisory.com/", "Strategy and influencer plan"),
     "amedanca": ("Amedanca Travels", "amedanca-travels.png", "https://amedanca.ae/", "Strategy and influencer plan"),
     "talentec": ("Talentec", "talentec.svg", "https://talentec.co/en", "Brand work, case study coming soon"),
-    "shopify": ("Shopify stores", "shopify.png", None, "Beauty, fashion and fragrance stores"),
+    "shopify": ("Shopify stores", "shopify.png", "https://www.shopify.com/", "Beauty, fashion and fragrance stores"),
     "lamise": ("Lamise Beauty", "lamise-beauty.svg", "https://www.lamisebeauty.com/", "Online shop, Google search and campaigns"),
     "hme": ("Home Experts", "home-experts.png", "https://www.homeexperts.ae/", "Strategy, content and promotions"),
     "hazo": ("Hazo Branding", "hazo-branding.png", "https://hazobranding.com/", "Social content and the content calendar"),
@@ -300,6 +300,17 @@ def portrait_x(c, cls=""):
             f'<span class="px-tag px-tag-b" aria-hidden="true"><i></i>Dubai · since 2020</span></figure>')
 
 
+CHAPTER_LINKS = {"Now": ["crwd"], "2025": ["altarasocial"], "2021": ["shopify"], "2020": ["hazo"]}
+
+
+def chapter_links(year):
+    keys = [k for k in CHAPTER_LINKS.get(year, []) if BRANDS[k][2]]
+    if not keys:
+        return ""
+    return '<p class="jx-links">' + "".join(
+        f'<a href="{BRANDS[k][2]}" target="_blank" rel="noopener">Visit {e("Shopify" if k == "shopify" else BRANDS[k][0])} {ARROW_UP}</a>' for k in keys) + "</p>"
+
+
 def journey(c, uid):
     CH = list(reversed(CHAPTERS))  # newest first: Now, then back in time
     reel = "".join(f'<span>{e(y)}</span>' for y, *_ in CH)
@@ -310,7 +321,7 @@ def journey(c, uid):
         note = f'<span class="jx-note">{e(rest[0])}</span>' if rest else ""
         logos = ('<div class="jx-brands">' + "".join(mark(c, b, " sm") for b in brands) + note + "</div>") if brands else ""
         panels += (f'<div class="jx-panel" role="tabpanel" id="{uid}-panel-{i}" aria-labelledby="{uid}-tab-{i}"{"" if i == 0 else " hidden"}>'
-                   f'<p class="jx-where">{e(where)}</p><h3 class="jx-line">{e(line)}</h3>'
+                   f'<p class="jx-where">{e(where)}</p><h3 class="jx-line">{e(line)}</h3>{chapter_links(y)}'
                    f'<p class="eyebrow jx-did-label">What I did</p><ul class="jx-cards">{cards}</ul>{logos}</div>')
     return f'''<div class="jx" data-journey>
 <div class="jx-stage">
@@ -372,7 +383,7 @@ def page_work(c):
 
 def page_about(c):
     hero = section(
-                   f'<div class="about-grid">{portrait_x(c, "px-about")}<div class="about-copy story"><h1 class="story-title">My journey</h1><p class="lede story-lead">I started as a social media manager in Uganda. I had a phone full of drafts, a content calendar and a lot of curiosity. Every post taught me something about people: what makes them stop, what makes them care and what makes them come back.</p><p class="story-p">Then I stepped into e-commerce. I ran online stores for beauty, fashion and perfume brands, from product pages to getting found on Google to the first sale of the day. That was where I learned that a beautiful brand still needs a reason to click “buy.”</p><p class="story-p">From stores I moved into campaigns. In Dubai I helped a home-services business turn attention into real customers and booked jobs. Then I took on five brands at once, across law, travel, HR, wellness and social, each with its own audience and its own voice.</p><p class="story-p">Today I set the strategy and lead the team. As Marketing Manager at CRWD Dubai, I guide marketing teams and campaigns for brands across the UAE. I set the vision, and directors, editors and designers bring it to life. AI now works alongside us, helping brands get found faster, create more and grow with the right tools.</p><p class="story-p">I’m proud of every brand that trusted me along the way. Each one taught me something, and each one is part of this story.</p><a class="tlink" href="{c.href("work")}">See the work {ARROW}</a></div></div>', "sec-first sec-about-hero")
+                   f'<div class="about-grid">{portrait_x(c, "px-about")}<div class="about-copy story"><h1 class="story-title">My journey</h1><p class="lede story-lead">I started as a social media manager in Uganda. I had a phone full of drafts, a content calendar and a lot of curiosity. Every post taught me something about people: what makes them stop, what makes them care and what makes them come back.</p><p class="story-p">Then I stepped into e-commerce. I ran online stores for beauty, fashion and perfume brands, from product pages to getting found on Google to the first sale of the day. That was where I learned that a beautiful brand still needs a reason to click “buy.”</p><p class="story-p">From stores I moved into campaigns. In Dubai I helped a home-services business turn attention into real customers and booked jobs. Then I took on five brands at once, across law, travel, HR, wellness and social, each with its own audience and its own voice.</p><p class="story-p">Today I set the strategy and lead the team. As Marketing Manager at <a class="story-link" href="https://crwdmarketing.com/ae" target="_blank" rel="noopener">CRWD Dubai</a>, I guide marketing teams and campaigns for brands across the UAE. I set the vision, and directors, editors and designers bring it to life. AI now works alongside us, helping brands get found faster, create more and grow with the right tools.</p><p class="story-p">I’m proud of every brand that trusted me along the way. Each one taught me something, and each one is part of this story.</p><a class="tlink" href="{c.href("work")}">See the work {ARROW}</a></div></div>', "sec-first sec-about-hero")
     story = section(head("Year by year", "Six years, one question.") + journey(c, "jx-about"), "sec-journey")
     how = section(head("How I work", "Plan first. Then launch.") + process()) + section(head("What I do", "I build the plan. My team builds the magic.") + services())
     return hero + story + how + cta(c)
