@@ -16,7 +16,7 @@ LINKEDIN = "https://www.linkedin.com/in/tracy-najjingo-1318a8418"
 LINKEDIN_LABEL = "in/tracy-najjingo-1318a8418"
 WHATSAPP = "971527675035"          # country code, no + or spaces. Empty hides the WhatsApp buttons.
 WHATSAPP_LABEL = "+971 52 767 5035"
-SITE_URL = "https://tracy-brand-story.lovable.app"   # change to your custom domain once it's connected
+SITE_URL = "https://www.tracynajjingo.com"
 OG_IMAGE = "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/lovp_7cyf5cw4sa9c38wcyee6f8e6p1/40c820aac6ce23d3eb4375d8768a19d9_1794568563783.png"
 
 # ---------------------------------------------------------------- BRANDS
