@@ -301,10 +301,11 @@ def portrait_x(c, cls=""):
 
 
 def journey(c, uid):
-    reel = "".join(f'<span>{e(y)}</span>' for y, *_ in CHAPTERS)
-    tabs = "".join(f'<button type="button" role="tab" class="jx-tab" id="{uid}-tab-{i}" aria-controls="{uid}-panel-{i}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" data-sub="{e(ch[2].split(" · ")[0])}">{e(y)}</button>' for i, (y, *_), ch in ((i, ch, ch) for i, ch in enumerate(CHAPTERS)))
+    CH = list(reversed(CHAPTERS))  # newest first: Now, then back in time
+    reel = "".join(f'<span>{e(y)}</span>' for y, *_ in CH)
+    tabs = "".join(f'<button type="button" role="tab" class="jx-tab" id="{uid}-tab-{i}" aria-controls="{uid}-panel-{i}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}" data-sub="{e(ch[2].split(" · ")[0])}">{e(y)}</button>' for i, (y, *_), ch in ((i, ch, ch) for i, ch in enumerate(CH)))
     panels = ""
-    for i, (y, line, where, did, brands, *rest) in enumerate(CHAPTERS):
+    for i, (y, line, where, did, brands, *rest) in enumerate(CH):
         cards = "".join(f'<li style="--i:{k}">{e(d)}</li>' for k, d in enumerate(did))
         note = f'<span class="jx-note">{e(rest[0])}</span>' if rest else ""
         logos = ('<div class="jx-brands">' + "".join(mark(c, b, " sm") for b in brands) + note + "</div>") if brands else ""
@@ -317,7 +318,7 @@ def journey(c, uid):
   <div class="jx-orb">
     <svg class="jx-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" pathLength="100"/></svg>
     <div class="jx-year" aria-hidden="true"><div class="jx-reel">{reel}</div></div>
-    <span class="jx-sub" aria-hidden="true">{e(CHAPTERS[0][2].split(" · ")[0])}</span>
+    <span class="jx-sub" aria-hidden="true">{e(CH[0][2].split(" · ")[0])}</span>
   </div>
 </div>
 <div class="jx-tabs" role="tablist" aria-label="Years">{tabs}<button type="button" class="jx-play" aria-label="Pause the timeline" data-playing="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path class="i-pause" d="M9 6v12M15 6v12"/><path class="i-play" d="M8 5l11 7-11 7z"/></svg></button></div>
@@ -342,7 +343,7 @@ def process():
 
 def page_home(c):
     hero = f'''<section class="hero"><div class="wrap hero-grid">
-<div class="hero-copy">{eyebrow("Brand & marketing strategist · Marketing Manager at CRWD Dubai")}
+<div class="hero-copy">{eyebrow("Brand & marketing strategist · Dubai")}
 <h1 class="display-1 hero-name">Tracy Najjingo</h1>
 <div class="actions"><a class="btn" href="https://wa.me/{WHATSAPP}" target="_blank" rel="noopener">{WA} WhatsApp me</a><a class="btn btn-ghost" href="mailto:{EMAIL}">{MAIL} Email me</a><a class="tlink" href="#journey">My journey {ARROW}</a></div></div>
 {portrait_x(c, "px-hero")}
@@ -467,7 +468,6 @@ def build():
     open(os.path.join(dist, "site.js"), "w").write(js)
     c = Ctx("dist")
     person = {"@context": "https://schema.org", "@type": "Person", "name": "Tracy Najjingo", "jobTitle": "Brand & Marketing Strategist",
-              "worksFor": {"@type": "Organization", "name": "CRWD Dubai"},
               "address": {"@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE"}, "email": EMAIL, "sameAs": [LINKEDIN], "url": SITE_URL}
     for route, title, desc, fn in PAGES:
         url = SITE_URL + ("/" + route if route else "/")
