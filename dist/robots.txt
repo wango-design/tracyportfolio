@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://tracynajjingo.com/sitemap.xml
+Sitemap: https://najjingo.netlify.app/sitemap.xml
